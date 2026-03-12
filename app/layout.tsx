@@ -14,7 +14,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eric Brand | Drummer",
+  title: "Eric Brand | Drummer/Singer",
   description:
     "Drummer for Wheel and The Charley Ramsay Trio. Upcoming gigs, live gear, and studio setup.",
 };
