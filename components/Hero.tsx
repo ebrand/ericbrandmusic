@@ -3,7 +3,7 @@ export default function Hero() {
     <section className="flex min-h-screen items-center justify-center px-6 pt-16">
       <div className="text-center">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
-          Drummer
+          Drummer/Singer
         </p>
         <h1 className="mb-4 font-heading text-6xl font-bold tracking-tight text-white sm:text-8xl">
           Eric Brand

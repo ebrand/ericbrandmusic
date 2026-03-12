@@ -15,25 +15,28 @@ export default function Footer() {
             <p className="mt-1 text-sm text-zinc-400">
               For bookings:{" "}
               <a
-                href="mailto:placeholder@email.com"
+                href="mailto:ericbrandmusic@gmail.com"
                 className="text-amber-400 transition-colors hover:text-amber-300"
               >
-                placeholder@email.com
+                ericbrandmusic@gmail.com
               </a>
             </p>
           </div>
 
           <ul className="flex flex-wrap justify-center gap-6 md:justify-end">
             {SOCIAL_LINKS.map((s) => (
-              <li key={s.label}>
+              <li key={s.label} className="group relative">
                 <a
                   href={s.href}
-                  className="text-sm text-zinc-400 transition-colors hover:text-amber-400"
+                  className="text-sm text-zinc-400 line-through transition-colors hover:text-amber-400"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {s.label}
                 </a>
+                <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded bg-zinc-800 px-2 py-1 text-xs text-zinc-200 opacity-0 transition-opacity group-hover:opacity-100">
+                  Live unpublished.
+                </span>
               </li>
             ))}
           </ul>

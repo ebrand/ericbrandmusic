@@ -32,8 +32,8 @@ export const liveGear: GearCategory[] = [
   {
     category: "Heads",
     items: [
-      "Placeholder batter heads — brand and model",
-      "Placeholder resonant heads — brand and model",
+      "Remo Ambassador Coated",
+      "Remo Powerstroke 3 Clear",
     ],
   },
   {
