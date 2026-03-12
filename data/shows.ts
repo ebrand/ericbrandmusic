@@ -6,6 +6,7 @@ export interface Show {
   venue: string;
   city: string;
   band: BandName;
+  venueUrl?: string;
   ticketUrl?: string;
 }
 
@@ -14,6 +15,7 @@ export const shows: Show[] = [
     id: "1",
     date: "2026-04-11",
     venue: "The Hole in the Wall",
+    venueUrl: "https://maps.app.goo.gl/jPYK9xwDHUrURttR7",
     city: "Austin, TX",
     band: "Wheel",
   },
@@ -21,6 +23,7 @@ export const shows: Show[] = [
     id: "2",
     date: "2026-03-14",
     venue: "Wake the Dead Coffee House",
+    venueUrl: "https://maps.app.goo.gl/PQ4hjuyGinmMDMAi9",
     city: "San Marcos, TX",
     band: "The Charley Ramsay Trio",
   },
@@ -28,6 +31,7 @@ export const shows: Show[] = [
     id: "3",
     date: "2026-03-22",
     venue: "Sanza Maeso Tasting Room and Bar",
+    venueUrl: "https://maps.app.goo.gl/q1LvyXKV932ZHpf16",
     city: "San Marcos, TX",
     band: "The Charley Ramsay Trio",
   },
@@ -35,6 +39,7 @@ export const shows: Show[] = [
     id: "4",
     date: "2026-04-11",
     venue: "Continental Club",
+    venueUrl: "https://maps.app.goo.gl/yaVCmDiawuC9U1ac7",
     city: "Austin, TX",
     band: "The Charley Ramsay Trio",
   },
@@ -42,13 +47,15 @@ export const shows: Show[] = [
     id: "5",
     date: "2026-04-25",
     venue: "Old Pal Texas Tavern",
+    venueUrl: "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
     city: "Lockhart, TX",
     band: "The Charley Ramsay Trio",
   },
   {
     id: "6",
     date: "2026-05-02",
-    venue: "Trailhead",
+    venue: "Trailhead Beer Garden",
+    venueUrl: "https://maps.app.goo.gl/rU3aWW7Y7cvDMeZK9",
     city: "Kerville, TX",
     band: "The Charley Ramsay Trio",
   },
@@ -56,6 +63,7 @@ export const shows: Show[] = [
     id: "7",
     date: "2026-05-09",
     venue: "Old Pal Texas Tavern",
+    venueUrl: "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
     city: "Lockhart, TX",
     band: "The Charley Ramsay Trio",
   },
@@ -63,6 +71,7 @@ export const shows: Show[] = [
     id: "8",
     date: "2026-08-13",
     venue: "Old Pal Texas Tavern",
+    venueUrl: "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
     city: "Lockhart, TX",
     band: "The Charley Ramsay Trio",
   },

@@ -43,7 +43,15 @@ export default function Shows() {
                 <td className="whitespace-nowrap px-6 py-4 text-zinc-300">
                   {formatDate(show.date)}
                 </td>
-                <td className="px-6 py-4 font-medium text-white">{show.venue}</td>
+                <td className="px-6 py-4 font-medium text-white">
+                  {show.venueUrl ? (
+                    <a href={show.venueUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {show.venue}
+                    </a>
+                  ) : (
+                    show.venue
+                  )}
+                </td>
                 <td className="px-6 py-4 text-zinc-400">{show.city}</td>
                 <td className="px-6 py-4">
                   <span
@@ -66,7 +74,15 @@ export default function Shows() {
             className="rounded-xl border border-zinc-800 bg-zinc-900 p-5"
           >
             <p className="mb-1 text-xs text-zinc-500">{formatDate(show.date)}</p>
-            <p className="font-semibold text-white">{show.venue}</p>
+            <p className="font-semibold text-white">
+              {show.venueUrl ? (
+                <a href={show.venueUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  {show.venue}
+                </a>
+              ) : (
+                show.venue
+              )}
+            </p>
             <p className="text-sm text-zinc-400">{show.city}</p>
             <span
               className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-medium ${BAND_BADGE[show.band]}`}
