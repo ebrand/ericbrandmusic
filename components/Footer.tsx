@@ -1,8 +1,10 @@
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
   { label: "Facebook", href: "#" },
-  { label: "Bandcamp", href: "#" },
+  { label: "Instagram", href: "#" },
+  { label: "Twitter (not X)", href: "#" },
   { label: "YouTube", href: "#" },
+  { label: "MySpace", href: "#" },
+  { label: "HeresWhatIAteToday", href: "#" },
 ];
 
 export default function Footer() {
