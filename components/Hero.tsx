@@ -1,3 +1,5 @@
+import EmailSignup from "./EmailSignup";
+
 export default function Hero() {
   return (
     <section className="flex min-h-screen items-center justify-center px-6 pt-16">
@@ -17,6 +19,7 @@ export default function Hero() {
         >
           Upcoming Shows
         </a>
+        <EmailSignup />
       </div>
     </section>
   );
