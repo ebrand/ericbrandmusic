@@ -8,7 +8,7 @@ const EMPTY_BAND: Omit<Band, "id"> = {
   name: "",
   genre: "",
   bio: "",
-  websiteUrl: "",
+  website_url: "",
 };
 
 export default function BandsManager({ initialBands }: { initialBands: Band[] }) {
@@ -78,7 +78,7 @@ export default function BandsManager({ initialBands }: { initialBands: Band[] })
       name: band.name,
       genre: band.genre,
       bio: band.bio,
-      websiteUrl: band.websiteUrl ?? "",
+      website_url: band.website_url ?? "",
     });
   };
 
@@ -145,8 +145,8 @@ export default function BandsManager({ initialBands }: { initialBands: Band[] })
               <span className="mb-1 block text-xs text-zinc-500">Website URL</span>
               <input
                 type="url"
-                value={form.websiteUrl}
-                onChange={(e) => updateField("websiteUrl", e.target.value)}
+                value={form.website_url ?? ""}
+                onChange={(e) => updateField("website_url", e.target.value)}
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:border-amber-400 focus:outline-none"
               />
             </label>
@@ -183,14 +183,14 @@ export default function BandsManager({ initialBands }: { initialBands: Band[] })
                 </p>
                 <h3 className="mt-1 text-lg font-bold text-white">{band.name}</h3>
                 <p className="mt-2 text-sm text-zinc-400">{band.bio}</p>
-                {band.websiteUrl && (
+                {band.website_url && (
                   <a
-                    href={band.websiteUrl}
+                    href={band.website_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block text-xs text-amber-400 hover:text-amber-300"
                   >
-                    {band.websiteUrl}
+                    {band.website_url}
                   </a>
                 )}
               </div>

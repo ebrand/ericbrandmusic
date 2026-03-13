@@ -1,7 +1,7 @@
 import { getBands } from "@/lib/data";
 
-export default function Bands() {
-  const bands = getBands();
+export default async function Bands() {
+  const bands = await getBands();
   return (
     <section id="bands" className="bg-zinc-900/30 py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -17,9 +17,9 @@ export default function Bands() {
               </p>
               <h3 className="mb-4 font-heading text-2xl font-bold text-white">{band.name}</h3>
               <p className="leading-relaxed text-zinc-400">{band.bio}</p>
-              {band.websiteUrl && (
+              {band.website_url && (
                 <a
-                  href={band.websiteUrl}
+                  href={band.website_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-block text-sm text-amber-400 transition-colors hover:text-amber-300"

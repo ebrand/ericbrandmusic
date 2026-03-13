@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateSession } from "@/lib/auth";
-import { getBands, writeBands } from "@/lib/data";
+import { getBands, createBand, updateBand, deleteBand } from "@/lib/data";
 
 async function guard() {
   const session = await validateSession();
@@ -13,7 +13,8 @@ async function guard() {
 export async function GET() {
   const denied = await guard();
   if (denied) return denied;
-  return NextResponse.json(getBands());
+  const bands = await getBands();
+  return NextResponse.json(bands);
 }
 
 export async function POST(request: NextRequest) {
@@ -21,11 +22,8 @@ export async function POST(request: NextRequest) {
   if (denied) return denied;
 
   const body = await request.json();
-  const bands = getBands();
   const id = body.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-  const newBand = { ...body, id };
-  bands.push(newBand);
-  writeBands(bands);
+  const newBand = await createBand({ ...body, id });
   return NextResponse.json(newBand, { status: 201 });
 }
 
@@ -33,15 +31,9 @@ export async function PUT(request: NextRequest) {
   const denied = await guard();
   if (denied) return denied;
 
-  const body = await request.json();
-  const bands = getBands();
-  const idx = bands.findIndex((b) => b.id === body.id);
-  if (idx === -1) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
-  bands[idx] = { ...bands[idx], ...body };
-  writeBands(bands);
-  return NextResponse.json(bands[idx]);
+  const { id, ...fields } = await request.json();
+  const updated = await updateBand(id, fields);
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(request: NextRequest) {
@@ -49,11 +41,6 @@ export async function DELETE(request: NextRequest) {
   if (denied) return denied;
 
   const { id } = await request.json();
-  const bands = getBands();
-  const filtered = bands.filter((b) => b.id !== id);
-  if (filtered.length === bands.length) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
-  writeBands(filtered);
+  await deleteBand(id);
   return NextResponse.json({ success: true });
 }

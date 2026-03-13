@@ -2,90 +2,97 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { GearCategory } from "@/data/types";
+import type { GearRow } from "@/data/types";
 
-type GearData = { liveGear: GearCategory[]; studioGear: GearCategory[] };
-type Section = "liveGear" | "studioGear";
+type Section = "live" | "studio";
 
-export default function GearManager({ initialGear }: { initialGear: GearData }) {
-  const [gear, setGear] = useState(initialGear);
-  const [activeSection, setActiveSection] = useState<Section>("liveGear");
-  const [editingIdx, setEditingIdx] = useState<number | null>(null);
+export default function GearManager({ initialGearRows }: { initialGearRows: GearRow[] }) {
+  const [rows, setRows] = useState(initialGearRows);
+  const [activeSection, setActiveSection] = useState<Section>("live");
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [adding, setAdding] = useState(false);
   const [catName, setCatName] = useState("");
   const [items, setItems] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const categories = gear[activeSection];
+  const sectionRows = rows.filter((r) => r.section === activeSection);
 
-  const save = async (updated: GearData) => {
+  const handleAdd = async () => {
     setLoading(true);
+    const maxOrder = sectionRows.reduce((max, r) => Math.max(max, r.sort_order), -1);
     const res = await fetch("/api/admin/gear", {
-      method: "PUT",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updated),
+      body: JSON.stringify({
+        section: activeSection,
+        category: catName,
+        items: items.split("\n").map((s) => s.trim()).filter(Boolean),
+        sort_order: maxOrder + 1,
+      }),
     });
     if (res.ok) {
-      setGear(updated);
+      const newRow = await res.json();
+      setRows((prev) => [...prev, newRow]);
+      setAdding(false);
+      setCatName("");
+      setItems("");
       router.refresh();
     }
     setLoading(false);
   };
 
-  const handleAdd = async () => {
-    const newCat: GearCategory = {
-      category: catName,
-      items: items.split("\n").map((s) => s.trim()).filter(Boolean),
-    };
-    const updated = {
-      ...gear,
-      [activeSection]: [...categories, newCat],
-    };
-    await save(updated);
-    setAdding(false);
-    setCatName("");
-    setItems("");
-  };
-
   const handleEdit = async () => {
-    if (editingIdx === null) return;
-    const newCat: GearCategory = {
-      category: catName,
-      items: items.split("\n").map((s) => s.trim()).filter(Boolean),
-    };
-    const newCategories = [...categories];
-    newCategories[editingIdx] = newCat;
-    const updated = { ...gear, [activeSection]: newCategories };
-    await save(updated);
-    setEditingIdx(null);
-    setCatName("");
-    setItems("");
+    if (editingId === null) return;
+    setLoading(true);
+    const res = await fetch("/api/admin/gear", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: editingId,
+        category: catName,
+        items: items.split("\n").map((s) => s.trim()).filter(Boolean),
+      }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setRows((prev) => prev.map((r) => (r.id === updated.id ? updated : r)));
+      setEditingId(null);
+      setCatName("");
+      setItems("");
+      router.refresh();
+    }
+    setLoading(false);
   };
 
-  const handleDelete = async (idx: number) => {
+  const handleDelete = async (id: number) => {
     if (!confirm("Delete this category?")) return;
-    const newCategories = categories.filter((_, i) => i !== idx);
-    const updated = { ...gear, [activeSection]: newCategories };
-    await save(updated);
+    const res = await fetch("/api/admin/gear", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    if (res.ok) {
+      setRows((prev) => prev.filter((r) => r.id !== id));
+      router.refresh();
+    }
   };
 
-  const startEdit = (idx: number) => {
-    const cat = categories[idx];
-    setEditingIdx(idx);
+  const startEdit = (row: GearRow) => {
+    setEditingId(row.id);
     setAdding(false);
-    setCatName(cat.category);
-    setItems(cat.items.join("\n"));
+    setCatName(row.category);
+    setItems(row.items.join("\n"));
   };
 
   const cancel = () => {
-    setEditingIdx(null);
+    setEditingId(null);
     setAdding(false);
     setCatName("");
     setItems("");
   };
 
-  const showForm = adding || editingIdx !== null;
+  const showForm = adding || editingId !== null;
 
   return (
     <div>
@@ -95,7 +102,7 @@ export default function GearManager({ initialGear }: { initialGear: GearData }) 
           <button
             onClick={() => {
               setAdding(true);
-              setEditingIdx(null);
+              setEditingId(null);
               setCatName("");
               setItems("");
             }}
@@ -108,7 +115,7 @@ export default function GearManager({ initialGear }: { initialGear: GearData }) 
 
       {/* Section toggle */}
       <div className="mb-6 flex gap-2">
-        {(["liveGear", "studioGear"] as const).map((section) => (
+        {(["live", "studio"] as const).map((section) => (
           <button
             key={section}
             onClick={() => {
@@ -121,7 +128,7 @@ export default function GearManager({ initialGear }: { initialGear: GearData }) 
                 : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
-            {section === "liveGear" ? "Live Gear" : "Studio Gear"}
+            {section === "live" ? "Live Gear" : "Studio Gear"}
           </button>
         ))}
       </div>
@@ -171,24 +178,24 @@ export default function GearManager({ initialGear }: { initialGear: GearData }) 
 
       {/* Categories list */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {categories.map((cat, idx) => (
+        {sectionRows.map((row) => (
           <div
-            key={cat.category}
+            key={row.id}
             className="rounded-xl border border-zinc-800 bg-zinc-900 p-6"
           >
             <div className="mb-4 flex items-start justify-between">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-amber-400">
-                {cat.category}
+                {row.category}
               </h3>
               <div className="flex gap-2">
                 <button
-                  onClick={() => startEdit(idx)}
+                  onClick={() => startEdit(row)}
                   className="text-xs text-amber-400 hover:text-amber-300"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(idx)}
+                  onClick={() => handleDelete(row.id)}
                   className="text-xs text-red-400 hover:text-red-300"
                 >
                   Delete
@@ -196,7 +203,7 @@ export default function GearManager({ initialGear }: { initialGear: GearData }) 
               </div>
             </div>
             <ul className="space-y-2">
-              {cat.items.map((item) => (
+              {row.items.map((item) => (
                 <li key={item} className="text-sm text-zinc-300">
                   {item}
                 </li>

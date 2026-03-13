@@ -25,8 +25,8 @@ function formatTime(time: string): string {
   return `${hour}:${m.toString().padStart(2, "0")} ${period}`;
 }
 
-export default function Shows() {
-  const shows = getShows();
+export default async function Shows() {
+  const shows = await getShows();
   return (
     <section id="shows" className="mx-auto max-w-6xl px-6 py-24">
       <h2 className="mb-12 font-heading text-3xl font-bold text-white">Upcoming Shows</h2>
@@ -56,8 +56,8 @@ export default function Shows() {
                   )}
                 </td>
                 <td className="px-6 py-4 font-medium text-white">
-                  {show.venueUrl ? (
-                    <a href={show.venueUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  {show.venue_url ? (
+                    <a href={show.venue_url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                       {show.venue}
                     </a>
                   ) : (
@@ -90,8 +90,8 @@ export default function Shows() {
               {show.time && <span> @ {formatTime(show.time)}</span>}
             </p>
             <p className="font-semibold text-white">
-              {show.venueUrl ? (
-                <a href={show.venueUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              {show.venue_url ? (
+                <a href={show.venue_url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                   {show.venue}
                 </a>
               ) : (

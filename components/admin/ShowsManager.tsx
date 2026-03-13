@@ -12,8 +12,8 @@ const EMPTY_SHOW: Omit<Show, "id"> = {
   city: "",
   band: "Wheel",
   time: "",
-  venueUrl: "",
-  ticketUrl: "",
+  venue_url: "",
+  ticket_url: "",
 };
 
 export default function ShowsManager({ initialShows }: { initialShows: Show[] }) {
@@ -63,7 +63,7 @@ export default function ShowsManager({ initialShows }: { initialShows: Show[] })
     setLoading(false);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     if (!confirm("Delete this show?")) return;
     const res = await fetch("/api/admin/shows", {
       method: "DELETE",
@@ -85,8 +85,8 @@ export default function ShowsManager({ initialShows }: { initialShows: Show[] })
       city: show.city,
       band: show.band,
       time: show.time ?? "",
-      venueUrl: show.venueUrl ?? "",
-      ticketUrl: show.ticketUrl ?? "",
+      venue_url: show.venue_url ?? "",
+      ticket_url: show.ticket_url ?? "",
     });
   };
 
@@ -135,7 +135,7 @@ export default function ShowsManager({ initialShows }: { initialShows: Show[] })
               <span className="mb-1 block text-xs text-zinc-500">Time (HH:MM)</span>
               <input
                 type="time"
-                value={form.time}
+                value={form.time ?? ""}
                 onChange={(e) => updateField("time", e.target.value)}
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:border-amber-400 focus:outline-none"
               />
@@ -176,8 +176,8 @@ export default function ShowsManager({ initialShows }: { initialShows: Show[] })
               <span className="mb-1 block text-xs text-zinc-500">Venue URL</span>
               <input
                 type="url"
-                value={form.venueUrl}
-                onChange={(e) => updateField("venueUrl", e.target.value)}
+                value={form.venue_url ?? ""}
+                onChange={(e) => updateField("venue_url", e.target.value)}
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:border-amber-400 focus:outline-none"
               />
             </label>
@@ -185,8 +185,8 @@ export default function ShowsManager({ initialShows }: { initialShows: Show[] })
               <span className="mb-1 block text-xs text-zinc-500">Ticket URL</span>
               <input
                 type="url"
-                value={form.ticketUrl}
-                onChange={(e) => updateField("ticketUrl", e.target.value)}
+                value={form.ticket_url ?? ""}
+                onChange={(e) => updateField("ticket_url", e.target.value)}
                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 focus:border-amber-400 focus:outline-none"
               />
             </label>
