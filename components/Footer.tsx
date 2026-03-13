@@ -45,7 +45,10 @@ export default function Footer() {
         </div>
 
         <p className="mt-12 text-center text-xs text-zinc-700">
-          &copy; {new Date().getFullYear()} Eric Brand. All rights reserved.
+          &copy; {new Date().getFullYear()} Eric Brand. All rights reserved.{" "}
+          <a href="/admin" className="text-zinc-800 transition-colors hover:text-zinc-600">
+            &middot;
+          </a>
         </p>
       </div>
     </footer>

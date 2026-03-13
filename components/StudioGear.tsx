@@ -1,6 +1,7 @@
-import { studioGear } from "@/data/gear";
+import { getGear } from "@/lib/data";
 
 export default function StudioGear() {
+  const { studioGear } = getGear();
   return (
     <section id="studio" className="bg-zinc-900/30 py-24">
       <div className="mx-auto max-w-6xl px-6">

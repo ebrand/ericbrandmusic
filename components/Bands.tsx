@@ -1,6 +1,7 @@
-import { bands } from "@/data/bands";
+import { getBands } from "@/lib/data";
 
 export default function Bands() {
+  const bands = getBands();
   return (
     <section id="bands" className="bg-zinc-900/30 py-24">
       <div className="mx-auto max-w-6xl px-6">

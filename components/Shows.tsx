@@ -1,4 +1,5 @@
-import { shows, type BandName } from "@/data/shows";
+import { getShows } from "@/lib/data";
+import type { BandName } from "@/data/types";
 
 const BAND_BADGE: Record<BandName, string> = {
   Wheel:
@@ -17,7 +18,15 @@ function formatDate(iso: string): string {
   });
 }
 
+function formatTime(time: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  const hour = h % 12 || 12;
+  return `${hour}:${m.toString().padStart(2, "0")} ${period}`;
+}
+
 export default function Shows() {
+  const shows = getShows();
   return (
     <section id="shows" className="mx-auto max-w-6xl px-6 py-24">
       <h2 className="mb-12 font-heading text-3xl font-bold text-white">Upcoming Shows</h2>
@@ -42,6 +51,9 @@ export default function Shows() {
               <tr key={show.id} className="transition-colors hover:bg-zinc-900/40">
                 <td className="whitespace-nowrap px-6 py-4 text-zinc-300">
                   {formatDate(show.date)}
+                  {show.time && (
+                    <span className="ml-2 text-zinc-500">@ {formatTime(show.time)}</span>
+                  )}
                 </td>
                 <td className="px-6 py-4 font-medium text-white">
                   {show.venueUrl ? (
@@ -73,7 +85,10 @@ export default function Shows() {
             key={show.id}
             className="rounded-xl border border-zinc-800 bg-zinc-900 p-5"
           >
-            <p className="mb-1 text-xs text-zinc-500">{formatDate(show.date)}</p>
+            <p className="mb-1 text-xs text-zinc-500">
+              {formatDate(show.date)}
+              {show.time && <span> @ {formatTime(show.time)}</span>}
+            </p>
             <p className="font-semibold text-white">
               {show.venueUrl ? (
                 <a href={show.venueUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">

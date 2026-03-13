@@ -1,0 +1,16 @@
+[
+  {
+    "id": "wheel",
+    "name": "Wheel",
+    "genre": "Tenacious Pop",
+    "bio": "Tenacious power pop from Austin, TX.",
+    "websiteUrl": "https://www.facebook.com/wheel404/"
+  },
+  {
+    "id": "charley-ramsay-trio",
+    "name": "The Charley Ramsay Trio",
+    "genre": "Singer/Songwriter",
+    "bio": "Hailing from Lockhart, Texas, Singer-songwriter Charley Ramsay is releasing Bottle Rocket Sunsets, a new record shaped by his time away from music, raising a family, and childhood nostalgia. After stepping away from songwriting for nearly 15 years, Ramsay returned in 2024 with Dirt Floor Camelot — a quiet re-entry that reminded him why he started writing songs in the first place. That return led directly to Bottle Rocket Sunsets, which earned him a 2025 Unsigned Music Awards semi-finalist placement.",
+    "websiteUrl": "https://charleyramsay.bandzoogle.com/home"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "date": "2026-04-11",
+    "time": "17:00",
+    "venue": "The Hole in the Wall",
+    "venueUrl": "https://maps.app.goo.gl/jPYK9xwDHUrURttR7",
+    "city": "Austin, TX",
+    "band": "Wheel"
+  },
+  {
+    "id": "2",
+    "date": "2026-03-14",
+    "time": "18:00",
+    "venue": "Wake the Dead Coffee House",
+    "venueUrl": "https://maps.app.goo.gl/PQ4hjuyGinmMDMAi9",
+    "city": "San Marcos, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "3",
+    "date": "2026-03-22",
+    "time": "16:00",
+    "venue": "Sanza Maeso Tasting Room and Bar",
+    "venueUrl": "https://maps.app.goo.gl/q1LvyXKV932ZHpf16",
+    "city": "San Marcos, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "4",
+    "date": "2026-04-11",
+    "time": "20:30",
+    "venue": "Continental Club",
+    "venueUrl": "https://maps.app.goo.gl/yaVCmDiawuC9U1ac7",
+    "city": "Austin, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "5",
+    "date": "2026-04-25",
+    "time": "21:30",
+    "venue": "Old Pal Texas Tavern",
+    "venueUrl": "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
+    "city": "Lockhart, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "6",
+    "date": "2026-05-02",
+    "time": "19:00",
+    "venue": "Trailhead Beer Garden",
+    "venueUrl": "https://maps.app.goo.gl/rU3aWW7Y7cvDMeZK9",
+    "city": "Kerville, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "7",
+    "date": "2026-05-09",
+    "time": "21:30",
+    "venue": "Old Pal Texas Tavern",
+    "venueUrl": "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
+    "city": "Lockhart, TX",
+    "band": "The Charley Ramsay Trio"
+  },
+  {
+    "id": "8",
+    "date": "2026-08-13",
+    "time": "19:00",
+    "venue": "Old Pal Texas Tavern",
+    "venueUrl": "https://maps.app.goo.gl/q8wFMHNsvdCNZSC57",
+    "city": "Lockhart, TX",
+    "band": "The Charley Ramsay Trio"
+  }
+]

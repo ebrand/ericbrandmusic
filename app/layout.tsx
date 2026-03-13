@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
 import { Geist, Space_Mono } from "next/font/google";
+import fs from "fs";
+import path from "path";
 import "./globals.css";
+import Background from "@/components/Background";
+
+const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+
+function getBackgroundImages(): string[] {
+  const dir = path.join(process.cwd(), "public", "backgrounds");
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => IMAGE_EXTENSIONS.has(path.extname(f).toLowerCase()))
+    .map((f) => `/backgrounds/${f}`);
+}
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +40,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} ${spaceMono.variable} font-sans antialiased`}>
+      <body className={`${geist.variable} ${spaceMono.variable} font-sans antialiased bg-zinc-950`}>
+        <Background images={getBackgroundImages()} />
         {children}
       </body>
     </html>
