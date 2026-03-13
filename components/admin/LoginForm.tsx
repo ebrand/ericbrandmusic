@@ -1,6 +1,6 @@
 "use client";
 
-import { StytchLogin, OAuthProviders, Products } from "@stytch/nextjs";
+import { StytchLogin, OAuthProviders, Products, defaultDarkTheme } from "@stytch/nextjs";
 
 const REDIRECT_URL =
   typeof window !== "undefined"
@@ -20,7 +20,7 @@ export default function LoginForm() {
           },
         }}
         presentation={{
-          theme: "dark",
+          theme: defaultDarkTheme,
         }}
       />
     </div>
