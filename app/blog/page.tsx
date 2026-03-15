@@ -8,7 +8,7 @@ import { getBlogPosts } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Blog | Eric Brand",
-  description: "Thoughts on drumming, music, gear, and life on the road.",
+  description: "Thoughts on drumming, music, gear, and playing live.",
 };
 
 export default async function BlogPage() {
