@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { label: "Shows", href: "#shows" },
   { label: "Bands", href: "#bands" },
   { label: "Gear", href: "#gear" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#contact" },
 ];
 

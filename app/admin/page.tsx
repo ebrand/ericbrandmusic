@@ -1,14 +1,15 @@
-import { getShows, getBands, getGearRows } from "@/lib/data";
+import { getShows, getBands, getGearRows, getBlogPosts } from "@/lib/data";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const [shows, bands, gearRows] = await Promise.all([
+  const [shows, bands, gearRows, blogPosts] = await Promise.all([
     getShows(),
     getBands(),
     getGearRows(),
+    getBlogPosts(),
   ]);
 
-  return <AdminDashboard shows={shows} bands={bands} gearRows={gearRows} />;
+  return <AdminDashboard shows={shows} bands={bands} gearRows={gearRows} blogPosts={blogPosts} />;
 }

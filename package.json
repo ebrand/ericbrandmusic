@@ -12,9 +12,12 @@
     "@stytch/nextjs": "^22.0.4",
     "@stytch/vanilla-js": "^6.0.4",
     "@supabase/supabase-js": "^2.99.1",
+    "@tailwindcss/typography": "^0.5.19",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "resend": "^6.9.3",
     "stytch": "^13.1.0"
   },

@@ -31,3 +31,16 @@ export interface GearRow {
   items: string[];
   sort_order: number;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string | null;
+  featured_image_url?: string | null;
+  tags: string[];
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+}

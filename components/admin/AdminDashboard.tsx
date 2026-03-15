@@ -2,22 +2,25 @@
 
 import { useState } from "react";
 import { useStytch, useStytchSession } from "@stytch/nextjs";
-import type { Show, Band, GearRow } from "@/data/types";
+import type { Show, Band, GearRow, BlogPost } from "@/data/types";
 import ShowsManager from "./ShowsManager";
 import BandsManager from "./BandsManager";
 import GearManager from "./GearManager";
+import BlogManager from "./BlogManager";
 
-const TABS = ["Shows", "Bands", "Gear"] as const;
+const TABS = ["Shows", "Bands", "Gear", "Blog"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function AdminDashboard({
   shows,
   bands,
   gearRows,
+  blogPosts,
 }: {
   shows: Show[];
   bands: Band[];
   gearRows: GearRow[];
+  blogPosts: BlogPost[];
 }) {
   const [activeTab, setActiveTab] = useState<Tab>("Shows");
   const stytch = useStytch();
@@ -89,6 +92,7 @@ export default function AdminDashboard({
         {activeTab === "Shows" && <ShowsManager initialShows={shows} />}
         {activeTab === "Bands" && <BandsManager initialBands={bands} />}
         {activeTab === "Gear" && <GearManager initialGearRows={gearRows} />}
+        {activeTab === "Blog" && <BlogManager initialPosts={blogPosts} />}
       </main>
     </div>
   );

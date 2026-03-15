@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import type { Show, Band, GearCategory, GearRow } from "@/data/types";
+import type { Show, Band, GearCategory, GearRow, BlogPost } from "@/data/types";
 
 // ── Shows ──────────────────────────────────────────────
 
@@ -144,5 +144,64 @@ export async function updateGearRow(
 
 export async function deleteGearRow(id: number): Promise<void> {
   const { error } = await supabase.from("gear").delete().eq("id", id);
+  if (error) throw error;
+}
+
+// ── Blog Posts ────────────────────────────────────────
+
+export async function getBlogPosts(publishedOnly = false): Promise<BlogPost[]> {
+  let query = supabase
+    .from("blog_posts")
+    .select("id, title, slug, content, excerpt, featured_image_url, tags, published, created_at, updated_at")
+    .order("created_at", { ascending: false });
+  if (publishedOnly) {
+    query = query.eq("published", true);
+  }
+  const { data, error } = await query;
+  if (error) throw error;
+  return data as BlogPost[];
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("id, title, slug, content, excerpt, featured_image_url, tags, published, created_at, updated_at")
+    .eq("slug", slug)
+    .single();
+  if (error) {
+    if (error.code === "PGRST116") return null;
+    throw error;
+  }
+  return data as BlogPost;
+}
+
+export async function createBlogPost(
+  post: Omit<BlogPost, "id" | "created_at" | "updated_at">
+): Promise<BlogPost> {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .insert(post)
+    .select()
+    .single();
+  if (error) throw error;
+  return data as BlogPost;
+}
+
+export async function updateBlogPost(
+  id: number,
+  fields: Partial<Omit<BlogPost, "id" | "created_at">>
+): Promise<BlogPost> {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .update({ ...fields, updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw error;
+  return data as BlogPost;
+}
+
+export async function deleteBlogPost(id: number): Promise<void> {
+  const { error } = await supabase.from("blog_posts").delete().eq("id", id);
   if (error) throw error;
 }
